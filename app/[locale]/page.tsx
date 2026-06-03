@@ -23,22 +23,38 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
-      {/* ── Hero ── */}
       <HeroSlider images={sliderImages} locale={locale} />
 
-      {/* ── About ── */}
-      <section className="py-24 border-b border-[--border]">
+      {/* ── Stats strip ── */}
+      <div className="bg-surface border-b border-[--border]">
         <div className="container-site">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-28 items-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[--border]">
+            {[
+              { n: '25+', label: locale === 'az' ? 'İllik Təcrübə' : locale === 'ru' ? 'Лет опыта' : 'Years Experience' },
+              { n: '35+', label: locale === 'az' ? 'Məhsul' : locale === 'ru' ? 'Продуктов' : 'Products' },
+              { n: '8',   label: locale === 'az' ? 'Kateqoriya' : locale === 'ru' ? 'Категорий' : 'Categories' },
+              { n: '3',   label: locale === 'az' ? 'Dil' : locale === 'ru' ? 'Языка' : 'Languages' },
+            ].map((s) => (
+              <div key={s.label} className="py-7 px-4 text-center">
+                <p className="text-3xl font-bold text-brand mb-0.5">{s.n}</p>
+                <p className="font-['Space_Mono'] text-[9px] tracking-widest uppercase text-[--muted]">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
-            {/* Text */}
+      {/* ── About ── */}
+      <section className="py-20 bg-white border-b border-[--border]">
+        <div className="container-site">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-14 lg:gap-20 items-center">
             <div>
               <span className="section-label">{t('about_title')}</span>
-              <div className="gold-rule mb-8" />
-              <h2 className="font-display text-4xl lg:text-5xl font-300 uppercase tracking-[0.06em] text-[--navy] leading-tight mb-8">
+              <div className="teal-rule mb-8" />
+              <h2 className="text-3xl lg:text-4xl font-semibold text-[--text] leading-tight mb-6 tracking-tight">
                 Alphachem
               </h2>
-              <p className="font-body text-[14px] text-[--muted] leading-relaxed mb-10 max-w-lg">
+              <p className="text-[14px] text-[--muted] leading-relaxed mb-8 max-w-lg">
                 {firstParagraph || 'Kimyəvi xammal tədarükü və marketinq şirkəti olan firmamız Alphachem 2000-ci ildən xidmətə başlamışdır.'}
               </p>
               <Link href={`/${locale}/about`} className="btn-outline">
@@ -46,36 +62,31 @@ export default async function HomePage({ params }: Props) {
               </Link>
             </div>
 
-            {/* Image with deco frame */}
             <div className="relative">
-              <div className="absolute -top-4 -right-4 w-full h-full border border-[--gold]/20 pointer-events-none" />
-              <div className="relative bg-[--navy] overflow-hidden" style={{ aspectRatio: '4/3' }}>
+              <div className="overflow-hidden rounded-sm shadow-md" style={{ aspectRatio: '4/3', backgroundColor: '#0D2137' }}>
                 <Image
                   src="https://alphachem.az/images/about-new.jpg"
                   alt="Alphachem"
                   fill
                   className="object-cover opacity-90"
                 />
-                {/* Gold left-edge accent */}
-                <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-[--gold]" />
               </div>
+              {/* Offset border accent */}
+              <div className="absolute -bottom-3 -right-3 w-24 h-24 border-2 border-brand opacity-20 pointer-events-none rounded-sm" />
             </div>
           </div>
         </div>
       </section>
 
       {/* ── Featured products ── */}
-      <section className="py-24">
+      <section className="py-20 bg-surface">
         <div className="container-site">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
               <span className="section-label">{t('products_title')}</span>
-              <div className="gold-rule" />
+              <div className="teal-rule" />
             </div>
-            <Link
-              href={`/${locale}/products`}
-              className="font-mono text-[9px] tracking-widest uppercase text-[--gold] hover:text-[--gold-hover] transition-colors self-start sm:self-auto"
-            >
+            <Link href={`/${locale}/products`} className="text-[12px] font-semibold text-brand hover:text-brand-dark transition-colors self-start sm:self-auto">
               {t('view_all')} →
             </Link>
           </div>
@@ -87,7 +98,7 @@ export default async function HomePage({ params }: Props) {
           </div>
 
           {products.length > 8 && (
-            <div className="mt-12 text-center">
+            <div className="mt-10 text-center">
               <Link href={`/${locale}/products`} className="btn-primary">
                 {t('view_all')}
               </Link>

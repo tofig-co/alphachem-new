@@ -20,99 +20,78 @@ export default function HeroSlider({ images, locale }: { images: SliderImage[]; 
   }, [images.length, next])
 
   return (
-    <div className="relative flex flex-col md:flex-row min-h-[90vh] overflow-hidden">
+    <section className="relative overflow-hidden" style={{ minHeight: '88vh', backgroundColor: '#0D2137' }}>
 
-      {/* ── Left panel — text ── */}
-      <div className="relative z-10 flex flex-col justify-center bg-[--navy] px-8 md:px-16 lg:px-20 py-20 md:py-0 md:w-[55%] lg:w-[52%] shrink-0">
-
-        {/* Art Deco corner ornaments */}
-        <span className="absolute top-8 left-8 w-6 h-6 border-t border-l border-[--gold] opacity-40" />
-        <span className="absolute bottom-8 right-8 md:right-0 w-6 h-6 border-b border-r border-[--gold] opacity-40" />
-
-        {/* Label row */}
-        <div className="flex items-center gap-3 mb-10">
-          <span className="block w-7 h-px bg-[--gold]" />
-          <span className="font-mono text-[8px] tracking-[0.28em] uppercase text-[--gold]">
-            Est. 2000 — Baku, Azerbaijan
-          </span>
+      {/* Background images */}
+      {images.map((img, i) => (
+        <div
+          key={img.id}
+          className="absolute inset-0 transition-opacity duration-1000"
+          style={{ opacity: i === current ? 1 : 0 }}
+        >
+          <Image
+            src={img.image_url}
+            alt={`slide ${i + 1}`}
+            fill
+            className="object-cover"
+            priority={i === 0}
+          />
         </div>
+      ))}
 
-        {/* Headline */}
-        <h1 className="font-display font-300 text-5xl sm:text-6xl lg:text-7xl text-white uppercase tracking-[0.04em] leading-[1.05] mb-6">
-          {t('hero_title')}
-        </h1>
+      {/* Gradient overlay — left heavy so text is always legible */}
+      <div
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(100deg, rgba(13,33,55,0.96) 0%, rgba(13,33,55,0.85) 45%, rgba(13,33,55,0.40) 75%, rgba(13,33,55,0.15) 100%)' }}
+      />
 
-        {/* Sector subtitle */}
-        <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-white/40 mb-12">
-          {t('hero_subtitle')}
-        </p>
+      {/* Subtle teal top accent */}
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-brand z-10" />
 
-        {/* CTAs */}
-        <div className="flex flex-wrap gap-4">
-          <Link href={`/${locale}/products`} className="btn-primary">
-            {t('hero_cta')}
-          </Link>
-          <Link href={`/${locale}/contact`} className="btn-outline-white">
-            {locale === 'az' ? 'Əlaqə' : locale === 'ru' ? 'Контакты' : 'Contact Us'}
-          </Link>
-        </div>
+      {/* Content */}
+      <div className="relative z-10 container-site flex flex-col justify-center h-full py-24" style={{ minHeight: '88vh' }}>
+        <div className="max-w-2xl">
 
-        {/* Slide indicators */}
-        {images.length > 1 && (
-          <div className="flex items-center gap-2 mt-14">
-            {images.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                aria-label={`Slide ${i + 1}`}
-                className={`h-px transition-all duration-500 bg-white/30 ${
-                  i === current ? 'w-10 !bg-[--gold]' : 'w-4 hover:bg-white/50'
-                }`}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* ── Right panel — image ── */}
-      <div className="relative flex-1 min-h-[40vh] md:min-h-0">
-        {/* Art Deco gold frame on the left edge */}
-        <div className="absolute left-0 top-8 bottom-8 w-px bg-[--gold] opacity-30 z-10" />
-
-        {images.length === 0 ? (
-          <div className="absolute inset-0 bg-[--navy-mid]" />
-        ) : (
-          images.map((img, i) => (
-            <div
-              key={img.id}
-              className={`absolute inset-0 transition-opacity duration-1000 ${i === current ? 'opacity-100' : 'opacity-0'}`}
-            >
-              <Image
-                src={img.image_url}
-                alt={`Alphachem product ${i + 1}`}
-                fill
-                className="object-cover"
-                priority={i === 0}
-              />
-              {/* Subtle navy vignette on right side */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[--navy]/20 to-transparent" />
-            </div>
-          ))
-        )}
-
-        {/* Slide counter — bottom right */}
-        {images.length > 1 && (
-          <div className="absolute bottom-6 right-6 z-10 flex items-center gap-2">
-            <span className="font-mono text-[10px] text-white/60 tabular-nums">
-              {String(current + 1).padStart(2, '0')}
-            </span>
-            <span className="w-6 h-px bg-white/30" />
-            <span className="font-mono text-[10px] text-white/30 tabular-nums">
-              {String(images.length).padStart(2, '0')}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-px w-8 bg-brand" />
+            <span className="font-['Space_Mono'] text-[9px] tracking-[0.25em] uppercase text-brand">
+              Est. 2000 — Baku, Azerbaijan
             </span>
           </div>
-        )}
+
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light text-white leading-tight tracking-tight mb-5">
+            {t('hero_title')}
+          </h1>
+
+          <p className="font-['Space_Mono'] text-[10px] tracking-[0.18em] uppercase text-white/40 mb-12">
+            {t('hero_subtitle')}
+          </p>
+
+          <div className="flex flex-wrap gap-4">
+            <Link href={`/${locale}/products`} className="btn-primary">
+              {t('hero_cta')}
+            </Link>
+            <Link href={`/${locale}/contact`} className="btn-outline-white">
+              {locale === 'az' ? 'Əlaqə' : locale === 'ru' ? 'Контакты' : 'Contact Us'}
+            </Link>
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* Slide indicators */}
+      {images.length > 1 && (
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              aria-label={`Slide ${i + 1}`}
+              className="h-px bg-white/25 transition-all duration-500"
+              style={{ width: i === current ? '2rem' : '0.75rem', backgroundColor: i === current ? '#0086A1' : 'rgba(255,255,255,0.25)' }}
+            />
+          ))}
+        </div>
+      )}
+    </section>
   )
 }

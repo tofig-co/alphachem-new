@@ -26,10 +26,10 @@ const CATEGORIES = [
 export default function Navbar({ locale }: { locale: string }) {
   const t  = useTranslations('nav')
   const tc = useTranslations('categories')
-  const pathname = usePathname()
-  const router   = useRouter()
-  const [menuOpen,     setMenuOpen]     = useState(false)
-  const [productsOpen, setProductsOpen] = useState(false)
+  const pathname   = usePathname()
+  const router     = useRouter()
+  const [open,     setOpen]     = useState(false)
+  const [products, setProducts] = useState(false)
 
   const switchLocale = (code: string) => {
     const segs = pathname.split('/')
@@ -37,37 +37,33 @@ export default function Navbar({ locale }: { locale: string }) {
     router.push(segs.join('/'))
   }
 
-  const href = (path: string) => `/${locale}${path}`
+  const href = (p: string) => `/${locale}${p}`
 
   return (
-    <header className="sticky top-0 z-50 bg-[--card] border-b border-[--border]">
-      {/* Navy accent stripe */}
-      <div className="h-[3px] bg-[--navy]" />
-
-      <div className="container-site flex items-center justify-between h-[70px]">
+    <header className="sticky top-0 z-50 bg-white border-b border-[--border] shadow-sm">
+      <div className="container-site flex items-center justify-between h-[68px]">
 
         {/* Logo */}
         <Link href={href('/')} className="flex items-center shrink-0">
           <Image
             src="/images/alpha_logo_colored.svg"
             alt="Alphachem"
-            width={148}
-            height={38}
+            width={150}
+            height={40}
             priority
           />
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-9">
+        <nav className="hidden md:flex items-center gap-8">
           {[
-            { path: '/',        label: t('home') },
-            { path: '/about',   label: t('about') },
-            { path: '/contact', label: t('contact') },
+            { path: '/',      label: t('home') },
+            { path: '/about', label: t('about') },
           ].map((item) => (
             <Link
               key={item.path}
               href={href(item.path)}
-              className="font-display text-[11px] font-600 tracking-[0.14em] uppercase text-[--navy] hover:text-[--gold] transition-colors duration-200"
+              className="text-[13px] font-medium text-[--muted] hover:text-brand transition-colors duration-200"
             >
               {item.label}
             </Link>
@@ -76,71 +72,69 @@ export default function Navbar({ locale }: { locale: string }) {
           {/* Products dropdown */}
           <div
             className="relative"
-            onMouseEnter={() => setProductsOpen(true)}
-            onMouseLeave={() => setProductsOpen(false)}
+            onMouseEnter={() => setProducts(true)}
+            onMouseLeave={() => setProducts(false)}
           >
             <Link
               href={href('/products')}
-              className="font-display text-[11px] font-600 tracking-[0.14em] uppercase text-[--navy] hover:text-[--gold] transition-colors duration-200 flex items-center gap-1.5"
+              className="text-[13px] font-medium text-[--muted] hover:text-brand transition-colors duration-200 flex items-center gap-1"
             >
               {t('products')}
-              <svg width="8" height="5" viewBox="0 0 8 5" fill="none">
-                <path d="M1 1l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg width="9" height="6" viewBox="0 0 9 6" fill="none" className="mt-px">
+                <path d="M1 1l3.5 3.5L8 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
 
-            {productsOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-[18px] w-72 bg-[--card] border border-[--border] border-t-2 border-t-[--gold] shadow-[0_8px_40px_rgba(13,31,53,0.12)]">
-                {/* caret */}
-                <div className="absolute -top-[9px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[7px] border-b-[--gold]" />
-
-                <div className="py-2">
-                  {CATEGORIES.map((cat) => (
-                    <Link
-                      key={cat.slug}
-                      href={`${href('/products')}?category=${cat.slug}`}
-                      onClick={() => setProductsOpen(false)}
-                      className="flex items-center gap-3 px-5 py-2.5 group/item"
-                    >
-                      <span className="w-px h-3 bg-[--border] group-hover/item:bg-[--gold] transition-colors duration-150" />
-                      <span className="font-mono text-[9px] tracking-widest uppercase text-[--muted] group-hover/item:text-[--gold] transition-colors duration-150">
-                        {tc(cat.key)}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-
-                <div className="border-t border-[--border] px-5 py-3">
+            {products && (
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-68 bg-white border border-[--border] shadow-lg rounded-sm overflow-hidden">
+                <div className="h-[3px] bg-brand" />
+                {CATEGORIES.map((cat) => (
+                  <Link
+                    key={cat.slug}
+                    href={`${href('/products')}?category=${cat.slug}`}
+                    onClick={() => setProducts(false)}
+                    className="flex items-center gap-3 px-4 py-2.5 text-[12px] text-[--muted] hover:text-brand hover:bg-brand-light transition-colors duration-150"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[--border] shrink-0" />
+                    {tc(cat.key)}
+                  </Link>
+                ))}
+                <div className="border-t border-[--border] px-4 py-2.5">
                   <Link
                     href={href('/products')}
-                    onClick={() => setProductsOpen(false)}
-                    className="font-mono text-[9px] tracking-widest uppercase text-[--gold] hover:text-[--gold-hover] transition-colors"
+                    onClick={() => setProducts(false)}
+                    className="text-[11px] font-semibold text-brand hover:text-brand-dark transition-colors"
                   >
-                    All Products →
+                    {t('products')} →
                   </Link>
                 </div>
               </div>
             )}
           </div>
+
+          <Link
+            href={href('/contact')}
+            className="text-[13px] font-medium text-[--muted] hover:text-brand transition-colors duration-200"
+          >
+            {t('contact')}
+          </Link>
         </nav>
 
         {/* Right: locale + CTA */}
-        <div className="hidden md:flex items-center gap-6">
-          <div className="flex items-center gap-0">
+        <div className="hidden md:flex items-center gap-5">
+          <div className="flex items-center gap-1">
             {LOCALES.map((l, i) => (
               <span key={l.code} className="flex items-center">
                 <button
                   onClick={() => switchLocale(l.code)}
-                  className={`font-mono text-[9px] tracking-widest uppercase px-2 py-1 transition-colors duration-200 ${
-                    locale === l.code
-                      ? 'text-[--gold]'
-                      : 'text-[--muted] hover:text-[--navy]'
+                  className={`font-['Space_Mono'] text-[9px] tracking-widest uppercase px-2 py-1 transition-colors ${
+                    locale === l.code ? 'text-brand font-bold' : 'text-[--subtle] hover:text-[--muted]'
                   }`}
                 >
                   {l.label}
                 </button>
                 {i < LOCALES.length - 1 && (
-                  <span className="text-[--border] select-none text-xs">·</span>
+                  <span className="text-[--border] text-[10px] select-none">·</span>
                 )}
               </span>
             ))}
@@ -148,7 +142,7 @@ export default function Navbar({ locale }: { locale: string }) {
 
           <Link
             href={href('/contact')}
-            className="font-display text-[9px] tracking-[0.15em] uppercase font-700 px-4 py-2.5 border border-[--gold] text-[--gold] hover:bg-[--gold] hover:text-white transition-all duration-200"
+            className="btn-primary text-[11px] py-2 px-4"
           >
             {t('contact')}
           </Link>
@@ -157,19 +151,19 @@ export default function Navbar({ locale }: { locale: string }) {
         {/* Mobile hamburger */}
         <button
           className="md:hidden flex flex-col gap-[5px] p-2"
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
-          <span className={`block w-6 h-px bg-[--navy] transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
-          <span className={`block w-6 h-px bg-[--navy] transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
-          <span className={`block w-6 h-px bg-[--navy] transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} />
+          <span className={`block w-5 h-px bg-[--text] transition-all duration-300 ${open ? 'rotate-45 translate-y-[6px]' : ''}`} />
+          <span className={`block w-5 h-px bg-[--text] transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
+          <span className={`block w-5 h-px bg-[--text] transition-all duration-300 ${open ? '-rotate-45 -translate-y-[6px]' : ''}`} />
         </button>
       </div>
 
       {/* Mobile drawer */}
-      {menuOpen && (
-        <div className="md:hidden bg-[--navy]">
-          <div className="container-site py-8">
+      {open && (
+        <div className="md:hidden bg-corp border-t border-[--border]">
+          <div className="container-site py-6">
             {[
               { path: '/',        label: t('home') },
               { path: '/about',   label: t('about') },
@@ -179,21 +173,21 @@ export default function Navbar({ locale }: { locale: string }) {
               <Link
                 key={item.path}
                 href={href(item.path)}
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-between py-4 border-b border-white/10 font-display text-[11px] tracking-[0.15em] uppercase text-white hover:text-[--gold] transition-colors duration-200"
+                onClick={() => setOpen(false)}
+                className="flex justify-between items-center py-3.5 border-b border-white/10 text-[13px] font-medium text-white/80 hover:text-white transition-colors"
               >
                 {item.label}
-                <span className="text-[--gold] opacity-50 text-xs">→</span>
+                <span className="text-brand text-xs">→</span>
               </Link>
             ))}
-            <div className="flex items-center gap-6 pt-7">
+            <div className="flex items-center gap-5 pt-5">
               {LOCALES.map((l) => (
                 <button
                   key={l.code}
-                  onClick={() => { switchLocale(l.code); setMenuOpen(false) }}
-                  className={`font-mono text-[9px] tracking-widest uppercase ${
-                    locale === l.code ? 'text-[--gold]' : 'text-white/35 hover:text-white/60'
-                  } transition-colors`}
+                  onClick={() => { switchLocale(l.code); setOpen(false) }}
+                  className={`font-['Space_Mono'] text-[9px] tracking-widest uppercase ${
+                    locale === l.code ? 'text-brand' : 'text-white/30'
+                  }`}
                 >
                   {l.label}
                 </button>

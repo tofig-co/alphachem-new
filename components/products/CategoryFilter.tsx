@@ -15,24 +15,31 @@ export default function CategoryFilter({ categories, locale, activeSlug }: Props
   const tc = useTranslations('categories')
   const router = useRouter()
 
-  const select = (slug?: string) => {
+  const go = (slug?: string) => {
     router.push(slug ? `/${locale}/products?category=${slug}` : `/${locale}/products`)
   }
 
-  const base    = 'font-display text-[9px] font-700 tracking-[0.15em] uppercase px-4 py-2.5 border transition-all duration-200'
-  const active  = 'bg-[--navy] text-white border-[--navy]'
-  const inactive = 'bg-transparent text-[--muted] border-[--border] hover:border-[--navy] hover:text-[--navy]'
-
   return (
     <div className="flex flex-wrap gap-2">
-      <button onClick={() => select()} className={`${base} ${!activeSlug ? active : inactive}`}>
+      <button
+        onClick={() => go()}
+        className={`text-[11px] font-semibold px-4 py-2 border transition-all duration-200 ${
+          !activeSlug
+            ? 'bg-corp text-white border-corp'
+            : 'bg-white text-[--muted] border-[--border] hover:border-corp hover:text-corp'
+        }`}
+      >
         {t('all_categories')}
       </button>
       {categories.map((cat) => (
         <button
           key={cat.id}
-          onClick={() => select(cat.slug)}
-          className={`${base} ${activeSlug === cat.slug ? 'bg-[--gold] text-white border-[--gold]' : inactive}`}
+          onClick={() => go(cat.slug)}
+          className={`text-[11px] font-semibold px-4 py-2 border transition-all duration-200 ${
+            activeSlug === cat.slug
+              ? 'bg-brand text-white border-brand'
+              : 'bg-white text-[--muted] border-[--border] hover:border-brand hover:text-brand'
+          }`}
         >
           {tc(cat.slug as Parameters<typeof tc>[0])}
         </button>
