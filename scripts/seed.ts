@@ -11,8 +11,8 @@ import { readFileSync, existsSync } from 'fs'
 import { join } from 'path'
 
 const SUPABASE_URL = 'https://zgecpsubfiyzgpnlxtny.supabase.co'
-const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnZWNwc3ViZml5emdwbmx4dG55Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDQ2NzAxMCwiZXhwIjoyMDk2MDQzMDEwfQ.FKJIzSrLvWw7iSjCP-moxtk65I1H1Mx2ivWVgtvJrO8'
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
+if (!SUPABASE_SERVICE_KEY) throw new Error('SUPABASE_SERVICE_ROLE_KEY is not set in .env.local')
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
