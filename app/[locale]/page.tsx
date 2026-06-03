@@ -18,70 +18,76 @@ export default async function HomePage({ params }: Props) {
     getSiteContent('about_text', locale as Locale),
   ])
 
-  const featured = products.slice(0, 8)
+  const featured       = products.slice(0, 8)
+  const firstParagraph = aboutText?.split('\n').filter(Boolean)[0] ?? ''
 
   return (
     <>
+      {/* ── Hero ── */}
       <HeroSlider images={sliderImages} locale={locale} />
 
-      {/* About section */}
-      <section className="py-20 border-b border-[--border]">
+      {/* ── About ── */}
+      <section className="py-24 border-b border-[--border]">
         <div className="container-site">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-28 items-center">
+
+            {/* Text */}
             <div>
-              <p className="section-label">{t('about_title')}</p>
-              <h2 className="text-2xl font-light text-[--foreground] leading-relaxed mb-6 tracking-tight">
-                Alpha Chemicals
+              <span className="section-label">{t('about_title')}</span>
+              <div className="gold-rule mb-8" />
+              <h2 className="font-display text-4xl lg:text-5xl font-300 uppercase tracking-[0.06em] text-[--navy] leading-tight mb-8">
+                Alphachem
               </h2>
-              <div className="text-sm text-[--muted] leading-relaxed space-y-4">
-                {aboutText ? (
-                  aboutText.split('\n').filter(Boolean).map((para, i) => (
-                    <p key={i}>{para}</p>
-                  ))
-                ) : (
-                  <p>
-                    Kimyəvi xammal tədarükü və marketinq şirkəti olan firmamız Alphachem
-                    2000-ci ildən xidmətə başlamışdır.
-                  </p>
-                )}
-              </div>
-              <Link href={`/${locale}/about`} className="btn-outline mt-8 inline-flex">
-                Ətraflı →
+              <p className="font-body text-[14px] text-[--muted] leading-relaxed mb-10 max-w-lg">
+                {firstParagraph || 'Kimyəvi xammal tədarükü və marketinq şirkəti olan firmamız Alphachem 2000-ci ildən xidmətə başlamışdır.'}
+              </p>
+              <Link href={`/${locale}/about`} className="btn-outline">
+                {locale === 'az' ? 'Ətraflı' : locale === 'ru' ? 'Подробнее' : 'Learn More'} →
               </Link>
             </div>
+
+            {/* Image with deco frame */}
             <div className="relative">
-              <Image
-                src="https://alphachem.az/images/about-new.jpg"
-                alt="Alphachem facility"
-                width={560}
-                height={420}
-                className="w-full object-cover"
-              />
+              <div className="absolute -top-4 -right-4 w-full h-full border border-[--gold]/20 pointer-events-none" />
+              <div className="relative bg-[--navy] overflow-hidden" style={{ aspectRatio: '4/3' }}>
+                <Image
+                  src="https://alphachem.az/images/about-new.jpg"
+                  alt="Alphachem"
+                  fill
+                  className="object-cover opacity-90"
+                />
+                {/* Gold left-edge accent */}
+                <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-[--gold]" />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Products section */}
-      <section className="py-20">
+      {/* ── Featured products ── */}
+      <section className="py-24">
         <div className="container-site">
-          <div className="flex items-end justify-between mb-10">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
             <div>
-              <p className="section-label">{t('products_title')}</p>
+              <span className="section-label">{t('products_title')}</span>
+              <div className="gold-rule" />
             </div>
-            <Link href={`/${locale}/products`} className="text-sm text-[--accent] hover:underline font-medium">
+            <Link
+              href={`/${locale}/products`}
+              className="font-mono text-[9px] tracking-widest uppercase text-[--gold] hover:text-[--gold-hover] transition-colors self-start sm:self-auto"
+            >
               {t('view_all')} →
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px bg-[--border]">
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {featured.map((product) => (
-              <div key={product.id} className="bg-[--background]">
-                <ProductCard product={product} locale={locale} />
-              </div>
+              <ProductCard key={product.id} product={product} locale={locale} />
             ))}
           </div>
+
           {products.length > 8 && (
-            <div className="mt-10 text-center">
+            <div className="mt-12 text-center">
               <Link href={`/${locale}/products`} className="btn-primary">
                 {t('view_all')}
               </Link>

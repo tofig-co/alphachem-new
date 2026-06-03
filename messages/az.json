@@ -7,9 +7,11 @@
   },
   "home": {
     "hero_cta": "Məhsullara bax",
+    "hero_title": "Kimyəvi Xammal Tədarükü",
+    "hero_subtitle": "Əczaçılıq · Baytarlıq · Texniki",
     "about_title": "Alpha Chemicals haqqında",
-    "products_title": "Kimyəvi məhsullar",
-    "view_all": "Hamısına bax"
+    "products_title": "Seçilmiş Məhsullar",
+    "view_all": "Bütün məhsullar"
   },
   "products": {
     "title": "Məhsullar",

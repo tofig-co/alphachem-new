@@ -7,9 +7,11 @@
   },
   "home": {
     "hero_cta": "Смотреть продукты",
+    "hero_title": "Поставщик Химического Сырья",
+    "hero_subtitle": "Фармацевтика · Ветеринария · Техническое",
     "about_title": "О компании Alpha Chemicals",
-    "products_title": "Химические продукты",
-    "view_all": "Смотреть все"
+    "products_title": "Избранные Продукты",
+    "view_all": "Все продукты"
   },
   "products": {
     "title": "Продукты",

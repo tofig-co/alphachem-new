@@ -12,7 +12,7 @@ export default function ProductCard({ product, locale, categoryLabel }: Props) {
   return (
     <Link
       href={`/${locale}/products/${product.slug}`}
-      className="group bg-white border border-[--border] hover:border-[--accent] transition-colors duration-200 flex flex-col"
+      className="group flex flex-col bg-[--card] border border-[--border] hover:border-[--gold] hover:shadow-[0_6px_32px_rgba(13,31,53,0.08)] transition-all duration-300"
     >
       {/* Image */}
       <div className="relative aspect-square bg-[--background] overflow-hidden">
@@ -21,31 +21,31 @@ export default function ProductCard({ product, locale, categoryLabel }: Props) {
             src={product.image_url}
             alt={product.name}
             fill
-            className="object-contain p-6 group-hover:scale-105 transition-transform duration-300"
+            className="object-contain p-7 transition-transform duration-500 group-hover:scale-[1.04]"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <rect width="40" height="40" rx="4" fill="#E8F0EB" />
-              <path d="M20 10v20M10 20h20" stroke="#1A4D2E" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
+            <span className="font-display text-5xl font-100 text-[--border]">α</span>
           </div>
         )}
+
+        {/* Gold top line on hover */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-[--gold] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
       </div>
 
       {/* Info */}
-      <div className="p-4 flex flex-col gap-2 flex-1">
+      <div className="p-4 flex flex-col gap-1 flex-1 border-t border-[--border] group-hover:border-[--gold]/30 transition-colors duration-300">
         {categoryLabel && (
-          <span className="text-[10px] font-mono tracking-widest uppercase text-[--muted]">
+          <span className="font-mono text-[8px] tracking-widest uppercase text-[--muted] group-hover:text-[--gold] transition-colors duration-200">
             {categoryLabel}
           </span>
         )}
-        <h3 className="text-sm font-medium text-[--foreground] leading-snug line-clamp-2">
+        <h3 className="font-display text-[13px] font-600 tracking-wide uppercase text-[--navy] leading-snug line-clamp-2 mt-0.5">
           {product.name}
         </h3>
-        <div className="mt-auto pt-2">
-          <span className="text-xs text-[--accent] font-medium group-hover:underline">
-            → Ətraflı
+        <div className="mt-auto pt-3">
+          <span className="font-mono text-[8px] tracking-widest uppercase text-[--gold] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            View Details →
           </span>
         </div>
       </div>

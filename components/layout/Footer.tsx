@@ -1,47 +1,101 @@
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Footer() {
-  const t = useTranslations('footer')
-  const tc = useTranslations('contact')
+  const t    = useTranslations('footer')
+  const tnav = useTranslations('nav')
+  const tc   = useTranslations('contact')
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-[--foreground] text-white mt-24">
-      <div className="container-site py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* Logo & tagline */}
+    <footer className="bg-[--navy] text-white mt-20">
+      {/* Gold top rule */}
+      <div className="h-[2px] bg-[--gold]" />
+
+      <div className="container-site py-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
+
+          {/* Brand */}
           <div>
             <Image
-              src="https://alphachem.az/alpha_logo_colored.svg"
+              src="/images/alpha_logo_colored.svg"
               alt="Alphachem"
-              width={120}
-              height={32}
-              className="brightness-0 invert mb-4"
+              width={136}
+              height={35}
+              className="brightness-0 invert mb-5 opacity-80"
             />
-            <p className="text-sm text-white/50 leading-relaxed max-w-xs">
+            <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-[--gold] mb-3">
+              Est. 2000
+            </p>
+            <p className="text-[13px] text-white/45 leading-relaxed max-w-[200px] font-body">
               {tc('address')}
             </p>
           </div>
 
-          {/* Contact */}
+          {/* Navigation */}
           <div>
-            <p className="text-[11px] font-mono tracking-[0.15em] uppercase text-white/40 mb-4">
-              {tc('subtitle')}
+            <p className="font-display text-[9px] tracking-[0.2em] uppercase text-[--gold] mb-6 font-700">
+              Navigation
             </p>
-            <div className="space-y-2">
-              <p className="text-sm text-white/70">{tc('phone')}</p>
-              <p className="text-sm text-white/70">{tc('email')}</p>
-            </div>
+            <nav className="space-y-3">
+              {[
+                { path: '/',        label: tnav('home') },
+                { path: '/about',   label: tnav('about') },
+                { path: '/products',label: tnav('products') },
+                { path: '/contact', label: tnav('contact') },
+              ].map((item) => (
+                <div key={item.path}>
+                  <Link
+                    href={item.path}
+                    className="font-body text-[13px] text-white/50 hover:text-[--gold] transition-colors duration-200"
+                  >
+                    {item.label}
+                  </Link>
+                </div>
+              ))}
+            </nav>
           </div>
 
-          {/* Empty column for balance */}
-          <div />
+          {/* Contact */}
+          <div>
+            <p className="font-display text-[9px] tracking-[0.2em] uppercase text-[--gold] mb-6 font-700">
+              {tc('title')}
+            </p>
+            <div className="space-y-5">
+              <div>
+                <p className="font-mono text-[8px] tracking-widest uppercase text-white/25 mb-1.5">
+                  {tc('phone_label')}
+                </p>
+                <a
+                  href={`tel:${tc('phone').replace(/\s/g, '')}`}
+                  className="font-body text-[13px] text-white/60 hover:text-[--gold] transition-colors duration-200"
+                >
+                  {tc('phone')}
+                </a>
+              </div>
+              <div>
+                <p className="font-mono text-[8px] tracking-widest uppercase text-white/25 mb-1.5">
+                  {tc('email_label')}
+                </p>
+                <a
+                  href={`mailto:${tc('email')}`}
+                  className="font-body text-[13px] text-white/60 hover:text-[--gold] transition-colors duration-200"
+                >
+                  {tc('email')}
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="border-t border-white/10 mt-10 pt-6 flex items-center justify-between">
-          <p className="text-xs text-white/30 font-mono">
+        {/* Bottom bar */}
+        <div className="border-t border-white/10 mt-12 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <p className="font-mono text-[9px] tracking-widest uppercase text-white/20">
             © {year} Alphachem. {t('rights')}.
+          </p>
+          <p className="font-mono text-[9px] tracking-widest uppercase text-white/15">
+            alphachem.az
           </p>
         </div>
       </div>

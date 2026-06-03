@@ -7,9 +7,11 @@
   },
   "home": {
     "hero_cta": "View Products",
+    "hero_title": "Chemical Raw Materials Supplier",
+    "hero_subtitle": "Pharmaceutical · Veterinary · Technical",
     "about_title": "About Alpha Chemicals",
-    "products_title": "Chemical Products",
-    "view_all": "View all"
+    "products_title": "Featured Products",
+    "view_all": "View all products"
   },
   "products": {
     "title": "Products",
