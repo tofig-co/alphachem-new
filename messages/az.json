@@ -1,0 +1,47 @@
+{
+  "nav": {
+    "home": "Ana səhifə",
+    "about": "Haqqımızda",
+    "products": "Məhsullar",
+    "contact": "Əlaqə"
+  },
+  "home": {
+    "hero_cta": "Məhsullara bax",
+    "about_title": "Alpha Chemicals haqqında",
+    "products_title": "Kimyəvi məhsullar",
+    "view_all": "Hamısına bax"
+  },
+  "products": {
+    "title": "Məhsullar",
+    "all_categories": "Bütün kateqoriyalar",
+    "no_products": "Bu kateqoriyada məhsul tapılmadı",
+    "back": "Məhsullara qayıt",
+    "inquire": "Sorğu göndər"
+  },
+  "about": {
+    "title": "Haqqımızda"
+  },
+  "contact": {
+    "title": "Əlaqə",
+    "subtitle": "Bizimlə əlaqə saxlayın",
+    "address_label": "Ünvan",
+    "phone_label": "Telefon",
+    "email_label": "E-poçt",
+    "address": "Azərbaycan, Bakı şəhəri",
+    "phone": "+994 55 535 00 01",
+    "email": "sales@alphachem.az"
+  },
+  "footer": {
+    "rights": "Bütün hüquqlar qorunur"
+  },
+  "categories": {
+    "api": "API (Aktiv)",
+    "excipient-pharma": "Excipient (Farma)",
+    "vitamin": "Vitamin",
+    "excipient-food": "Excipient (Qida)",
+    "excipient-technical": "Excipient (Texniki)",
+    "intermediate": "Intermediate",
+    "other": "Digər kimyəvi maddələr",
+    "mineral": "Mineral"
+  }
+}

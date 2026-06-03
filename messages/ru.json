@@ -1,0 +1,47 @@
+{
+  "nav": {
+    "home": "Главная",
+    "about": "О нас",
+    "products": "Продукты",
+    "contact": "Контакты"
+  },
+  "home": {
+    "hero_cta": "Смотреть продукты",
+    "about_title": "О компании Alpha Chemicals",
+    "products_title": "Химические продукты",
+    "view_all": "Смотреть все"
+  },
+  "products": {
+    "title": "Продукты",
+    "all_categories": "Все категории",
+    "no_products": "В этой категории продуктов нет",
+    "back": "Назад к продуктам",
+    "inquire": "Отправить запрос"
+  },
+  "about": {
+    "title": "О нас"
+  },
+  "contact": {
+    "title": "Контакты",
+    "subtitle": "Свяжитесь с нами",
+    "address_label": "Адрес",
+    "phone_label": "Телефон",
+    "email_label": "Эл. почта",
+    "address": "Азербайджан, г. Баку",
+    "phone": "+994 55 535 00 01",
+    "email": "sales@alphachem.az"
+  },
+  "footer": {
+    "rights": "Все права защищены"
+  },
+  "categories": {
+    "api": "API (Активный)",
+    "excipient-pharma": "Вспомогательное вещество (Фарма)",
+    "vitamin": "Витамин",
+    "excipient-food": "Вспомогательное вещество (Пищевое)",
+    "excipient-technical": "Вспомогательное вещество (Техническое)",
+    "intermediate": "Промежуточный продукт",
+    "other": "Прочие химикаты",
+    "mineral": "Минерал"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "products": "Products",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero_cta": "View Products",
+    "about_title": "About Alpha Chemicals",
+    "products_title": "Chemical Products",
+    "view_all": "View all"
+  },
+  "products": {
+    "title": "Products",
+    "all_categories": "All categories",
+    "no_products": "No products found in this category",
+    "back": "Back to products",
+    "inquire": "Send Inquiry"
+  },
+  "about": {
+    "title": "About Us"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get in touch with us",
+    "address_label": "Address",
+    "phone_label": "Phone",
+    "email_label": "Email",
+    "address": "Azerbaijan, Baku",
+    "phone": "+994 55 535 00 01",
+    "email": "sales@alphachem.az"
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  },
+  "categories": {
+    "api": "API (Active)",
+    "excipient-pharma": "Excipient (Pharma)",
+    "vitamin": "Vitamin",
+    "excipient-food": "Excipient (Food)",
+    "excipient-technical": "Excipient (Technical)",
+    "intermediate": "Intermediate",
+    "other": "Other Chemicals",
+    "mineral": "Mineral"
+  }
+}
