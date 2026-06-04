@@ -14,22 +14,26 @@ A minimal, functional CMS built inside the existing Next.js 16 App Router codeba
 
 ## Auth & Session
 
-**Env var:** `ADMIN_PASSWORD` added to `.env.local` (and `.env.example`).
+**Env vars** added to `.env.local` (and `.env.example`):
+- `ADMIN_PASSWORD` — checked only at login, never stored anywhere after that
+- `ADMIN_SECRET` — a random token (e.g. `openssl rand -hex 32`), used as the session cookie value; completely independent of the password
 
 **Login flow:**
 1. User visits any `/admin/*` route
-2. `/admin/layout.tsx` reads the `admin_session` cookie and compares it to `sha256(ADMIN_PASSWORD)`
+2. `/admin/layout.tsx` reads the `admin_session` cookie and compares it to `process.env.ADMIN_SECRET`
 3. If missing or invalid → redirect to `/admin/login`
 4. `/admin/login/page.tsx` renders a plain form
-5. On submit, a Server Action in `app/admin/login/actions.ts` compares the posted password to `process.env.ADMIN_PASSWORD`
-6. On match → sets `admin_session` cookie (httpOnly, sameSite: strict, path: /admin) with value `sha256(ADMIN_PASSWORD)` → redirects to `/admin/products`
-7. On failure → returns an error message to the form
+5. On submit, a Server Action in `app/admin/login/actions.ts` compares the posted password to `process.env.ADMIN_PASSWORD` using a constant-time comparison (`timingSafeEqual` from Node `crypto`)
+6. On match → sets `admin_session` cookie (httpOnly, sameSite: strict, path: /admin) with value `process.env.ADMIN_SECRET` → redirects to `/admin/products`
+7. On failure → returns a generic error message ("Invalid password")
+
+**Why two vars:** The cookie value is a random secret unrelated to the password. Even with the source code public, an attacker cannot forge a session without `ADMIN_SECRET`. The password check uses `timingSafeEqual` to prevent timing attacks.
 
 **Logout:** Server Action in the layout that clears the `admin_session` cookie and redirects to `/admin/login`.
 
 **Middleware:** No changes to `middleware.ts`. The existing next-intl middleware only matches `[locale]` paths; `/admin` is outside its matcher.
 
-**Cookie validation helper:** `lib/admin/auth.ts` — exports `getAdminSession(): Promise<boolean>` and `requireAdmin()` (throws redirect if not authenticated). Called at the top of every admin Server Action and in the layout.
+**Cookie validation helper:** `lib/admin/auth.ts` — exports `requireAdmin()` (redirects to login if not authenticated) and `verifyPassword(input)` (constant-time compare). Called at the top of every admin Server Action and in the layout.
 
 ---
 
@@ -194,6 +198,7 @@ No create or edit.
 
 ```
 ADMIN_PASSWORD=your-admin-password
+ADMIN_SECRET=<output of: openssl rand -hex 32>
 ```
 
 Added to `.env.local` and `.env.example`.
