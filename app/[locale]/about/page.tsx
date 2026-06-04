@@ -70,7 +70,7 @@ export default async function AboutPage({ params }: Props) {
     { year: '2005', event: locale === 'az' ? 'Əczaçılıq sektoruna genişlənmə' : locale === 'ru' ? 'Расширение в фармацевтику' : 'Expansion into pharmaceutical sector' },
     { year: '2010', event: locale === 'az' ? 'Beynəlxalq tərəfdaşlıqlar' : locale === 'ru' ? 'Международные партнёрства' : 'International partnerships established' },
     { year: '2020', event: locale === 'az' ? '20 il xidmət' : locale === 'ru' ? '20 лет работы' : '20 years of service' },
-    { year: '2025', event: locale === 'az' ? '35+ məhsul, 3 dil' : locale === 'ru' ? '35+ продуктов, 3 языка' : '35+ products, 3 languages' },
+    { year: '2025', event: locale === 'az' ? '35+ məhsul' : locale === 'ru' ? '35+ продуктов' : '35+ products' },
   ]
 
   return (
@@ -130,14 +130,12 @@ export default async function AboutPage({ params }: Props) {
             <div className="space-y-6">
               {timeline.map((item, i) => (
                 <Reveal key={item.year} delay={i * 80}>
-                  <div className="flex items-start gap-6">
-                    <div className="w-16 shrink-0 text-right">
+                  <div className="flex items-center">
+                    <div className="w-[66px] shrink-0 text-right pr-1">
                       <span className="font-mono-chem text-[11px] font-bold text-brand">{item.year}</span>
                     </div>
-                    <div className="relative">
-                      <div className="absolute -left-[29px] top-1 w-3 h-3 rounded-full bg-brand border-2 border-white shadow-sm" />
-                    </div>
-                    <p className="text-[14px] text-[--text] pt-0.5 pl-2">{item.event}</p>
+                    <div className="w-3 h-3 rounded-full bg-brand border-2 border-white shadow-sm shrink-0" />
+                    <p className="text-[14px] text-[--text] pl-5">{item.event}</p>
                   </div>
                 </Reveal>
               ))}

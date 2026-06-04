@@ -73,11 +73,12 @@ export default function ProductsClient({ locale, allProducts, categories, initia
                 <path d="M11 11l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
               </svg>
               <input
-                type="search"
+                type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={t('search_placeholder')}
                 className="field pl-9 py-2 text-[13px] rounded-full"
+                style={{paddingLeft: "30px"}}
               />
             </div>
 

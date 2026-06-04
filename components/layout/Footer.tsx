@@ -22,7 +22,8 @@ export default function Footer() {
               alt="Alphachem"
               width={140}
               height={36}
-              className="brightness-0 invert opacity-80 mb-4"
+              unoptimized
+              className="  mb-4"
             />
             <p className="text-[13px] text-white/45 leading-relaxed max-w-xs mb-6">
               {t('tagline')}

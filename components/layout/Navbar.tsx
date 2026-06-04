@@ -63,7 +63,7 @@ export default function Navbar({ locale }: { locale: string }) {
             width={148}
             height={38}
             priority
-            className={isHero ? 'brightness-0 invert' : ''}
+            unoptimized
           />
         </Link>
 
@@ -76,9 +76,7 @@ export default function Navbar({ locale }: { locale: string }) {
             <Link
               key={item.path}
               href={href(item.path)}
-              className={`text-[13px] font-medium transition-colors duration-200 ${
-                isHero ? 'text-white/80 hover:text-white' : 'text-[--muted] hover:text-brand'
-              }`}
+              className="text-[13px] font-medium transition-colors duration-200 text-[--muted] hover:text-brand"
             >
               {item.label}
             </Link>
@@ -88,9 +86,7 @@ export default function Navbar({ locale }: { locale: string }) {
           <div className="relative" onMouseEnter={() => setProdOpen(true)} onMouseLeave={() => setProdOpen(false)}>
             <Link
               href={href('/products')}
-              className={`text-[13px] font-medium transition-colors duration-200 flex items-center gap-1 ${
-                isHero ? 'text-white/80 hover:text-white' : 'text-[--muted] hover:text-brand'
-              }`}
+              className="text-[13px] font-medium transition-colors duration-200 flex items-center gap-1 text-[--muted] hover:text-brand"
             >
               {t('products')}
               <svg width="9" height="6" viewBox="0 0 9 6" fill="none">
@@ -123,9 +119,7 @@ export default function Navbar({ locale }: { locale: string }) {
 
           <Link
             href={href('/contact')}
-            className={`text-[13px] font-medium transition-colors duration-200 ${
-              isHero ? 'text-white/80 hover:text-white' : 'text-[--muted] hover:text-brand'
-            }`}
+            className="text-[13px] font-medium transition-colors duration-200 text-[--muted] hover:text-brand"
           >
             {t('contact')}
           </Link>
@@ -141,7 +135,7 @@ export default function Navbar({ locale }: { locale: string }) {
                   className={`font-mono-chem text-[9px] tracking-widest uppercase px-2 py-1 transition-colors ${
                     locale === l.code
                       ? 'text-brand font-bold'
-                      : isHero ? 'text-white/40 hover:text-white/70' : 'text-[--subtle] hover:text-[--muted]'
+                      : isHero ? 'text-[--subtle] hover:text-[--muted]' : 'text-[--subtle] hover:text-[--muted]'
                   }`}
                 >
                   {l.label}
