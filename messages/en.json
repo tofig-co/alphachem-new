@@ -3,38 +3,93 @@
     "home": "Home",
     "about": "About",
     "products": "Products",
-    "contact": "Contact"
+    "contact": "Contact",
+    "request_quote": "Request Quote"
   },
   "home": {
-    "hero_cta": "View Products",
-    "hero_title": "Chemical Raw Materials Supplier",
+    "hero_eyebrow": "Est. 2000 · Baku, Azerbaijan",
+    "hero_title": "Reliable Supply of Chemical Raw Materials",
     "hero_subtitle": "Pharmaceutical · Veterinary · Technical",
-    "about_title": "About Alpha Chemicals",
+    "hero_cta": "Browse Products",
+    "hero_cta_secondary": "Request Quote",
+    "stats_years": "Years Experience",
+    "stats_products": "Products",
+    "stats_compliance": "MoH Compliant",
+    "stats_delivery": "Fast Delivery",
+    "industries_eyebrow": "Industries We Supply",
+    "industries_pharma_title": "Pharmaceutical",
+    "industries_pharma_desc": "API, excipients and vitamins for drug manufacturing and formulation.",
+    "industries_vet_title": "Veterinary",
+    "industries_vet_desc": "High-purity compounds for veterinary medicine production.",
+    "industries_tech_title": "Technical & Industrial",
+    "industries_tech_desc": "Inorganic salts and chemicals for technical and industrial applications.",
+    "products_eyebrow": "Product Catalog",
     "products_title": "Featured Products",
-    "view_all": "View all products"
+    "view_all": "View all products",
+    "about_eyebrow": "About Alphachem",
+    "about_title": "25 years of expertise in chemical supply",
+    "learn_more": "Learn more",
+    "cta_title": "Need a specific compound?",
+    "cta_sub": "Our team sources hard-to-find chemicals quickly and at competitive prices.",
+    "cta_whatsapp": "WhatsApp Us",
+    "cta_email": "Email Us"
   },
   "products": {
     "title": "Products",
-    "all_categories": "All categories",
-    "no_products": "No products found in this category",
+    "eyebrow": "Product Catalog",
+    "search_placeholder": "Search by name or formula...",
+    "all_categories": "All",
+    "no_products": "No products found",
     "back": "Back to products",
-    "inquire": "Send Inquiry"
+    "inquire": "Request Quotation",
+    "specs_title": "Technical Specifications",
+    "related_title": "Related Products",
+    "inquiry_prompt": "Interested in this product?"
+  },
+  "inquiry": {
+    "title": "Request Quotation",
+    "subtitle": "Fill in your details and we'll respond within 1 business day.",
+    "name": "Full Name",
+    "name_ph": "Your full name",
+    "company": "Company",
+    "company_ph": "Your company name",
+    "email": "Email Address",
+    "email_ph": "you@company.com",
+    "phone": "Phone (optional)",
+    "phone_ph": "+994 XX XXX XX XX",
+    "message": "Message",
+    "message_ph": "Describe your requirements — quantity, purity grade, packaging, etc.",
+    "submit": "Send Inquiry",
+    "submitting": "Sending...",
+    "success_title": "Inquiry sent!",
+    "success_body": "We'll get back to you within 1 business day at the email you provided.",
+    "error": "Something went wrong. Please try again or contact us directly."
   },
   "about": {
-    "title": "About Us"
+    "title": "About Us",
+    "eyebrow": "Our Story",
+    "timeline_title": "Two Decades of Growth",
+    "values_title": "What Sets Us Apart"
   },
   "contact": {
     "title": "Contact",
-    "subtitle": "Get in touch with us",
+    "eyebrow": "Get In Touch",
+    "subtitle": "Send us an inquiry and we'll respond within 1 business day.",
     "address_label": "Address",
     "phone_label": "Phone",
     "email_label": "Email",
+    "hours_label": "Working Hours",
     "address": "Azerbaijan, Baku",
     "phone": "+994 55 535 00 01",
-    "email": "sales@alphachem.az"
+    "email": "sales@alphachem.az",
+    "hours": "Monday – Friday: 09:00 – 18:00",
+    "hours_tz": "Baku time (UTC +4)"
   },
   "footer": {
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "tagline": "Your trusted chemical raw materials partner since 2000.",
+    "nav_title": "Navigation",
+    "contact_title": "Contact Us"
   },
   "categories": {
     "api": "API (Active)",

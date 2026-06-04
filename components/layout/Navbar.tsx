@@ -4,13 +4,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-const LOCALES = [
-  { code: 'az', label: 'AZ' },
-  { code: 'en', label: 'EN' },
-  { code: 'ru', label: 'RU' },
-]
+const LOCALES = [{ code: 'az', label: 'AZ' }, { code: 'en', label: 'EN' }, { code: 'ru', label: 'RU' }]
 
 const CATEGORIES = [
   { slug: 'api',                key: 'api' },
@@ -24,12 +20,20 @@ const CATEGORIES = [
 ]
 
 export default function Navbar({ locale }: { locale: string }) {
-  const t  = useTranslations('nav')
-  const tc = useTranslations('categories')
-  const pathname   = usePathname()
-  const router     = useRouter()
-  const [open,     setOpen]     = useState(false)
-  const [products, setProducts] = useState(false)
+  const t       = useTranslations('nav')
+  const tc      = useTranslations('categories')
+  const pathname = usePathname()
+  const router   = useRouter()
+
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [prodOpen, setProdOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const switchLocale = (code: string) => {
     const segs = pathname.split('/')
@@ -39,8 +43,16 @@ export default function Navbar({ locale }: { locale: string }) {
 
   const href = (p: string) => `/${locale}${p}`
 
+  const isHero = !scrolled && pathname === `/${locale}`
+
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-[--border] shadow-sm">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        isHero
+          ? 'bg-transparent border-b border-white/10'
+          : 'bg-white border-b border-[--border] shadow-sm'
+      }`}
+    >
       <div className="container-site flex items-center justify-between h-[68px]">
 
         {/* Logo */}
@@ -48,9 +60,10 @@ export default function Navbar({ locale }: { locale: string }) {
           <Image
             src="/images/alpha_logo_colored.svg"
             alt="Alphachem"
-            width={150}
-            height={40}
+            width={148}
+            height={38}
             priority
+            className={isHero ? 'brightness-0 invert' : ''}
           />
         </Link>
 
@@ -63,48 +76,44 @@ export default function Navbar({ locale }: { locale: string }) {
             <Link
               key={item.path}
               href={href(item.path)}
-              className="text-[13px] font-medium text-[--muted] hover:text-brand transition-colors duration-200"
+              className={`text-[13px] font-medium transition-colors duration-200 ${
+                isHero ? 'text-white/80 hover:text-white' : 'text-[--muted] hover:text-brand'
+              }`}
             >
               {item.label}
             </Link>
           ))}
 
           {/* Products dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setProducts(true)}
-            onMouseLeave={() => setProducts(false)}
-          >
+          <div className="relative" onMouseEnter={() => setProdOpen(true)} onMouseLeave={() => setProdOpen(false)}>
             <Link
               href={href('/products')}
-              className="text-[13px] font-medium text-[--muted] hover:text-brand transition-colors duration-200 flex items-center gap-1"
+              className={`text-[13px] font-medium transition-colors duration-200 flex items-center gap-1 ${
+                isHero ? 'text-white/80 hover:text-white' : 'text-[--muted] hover:text-brand'
+              }`}
             >
               {t('products')}
-              <svg width="9" height="6" viewBox="0 0 9 6" fill="none" className="mt-px">
-                <path d="M1 1l3.5 3.5L8 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <svg width="9" height="6" viewBox="0 0 9 6" fill="none">
+                <path d="M1 1l3.5 3.5L8 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </Link>
 
-            {products && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-68 bg-white border border-[--border] shadow-lg rounded-sm overflow-hidden">
+            {prodOpen && (
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-68 bg-white border border-[--border] shadow-xl overflow-hidden rounded-sm">
                 <div className="h-[3px] bg-brand" />
                 {CATEGORIES.map((cat) => (
                   <Link
                     key={cat.slug}
                     href={`${href('/products')}?category=${cat.slug}`}
-                    onClick={() => setProducts(false)}
-                    className="flex items-center gap-3 px-4 py-2.5 text-[12px] text-[--muted] hover:text-brand hover:bg-brand-light transition-colors duration-150"
+                    onClick={() => setProdOpen(false)}
+                    className="flex items-center gap-3 px-4 py-2.5 text-[12px] text-[--muted] hover:text-brand hover:bg-brand-light transition-colors"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[--border] shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-light group-hover:bg-brand shrink-0" style={{ background: '#0086A1', opacity: .4 }} />
                     {tc(cat.key)}
                   </Link>
                 ))}
                 <div className="border-t border-[--border] px-4 py-2.5">
-                  <Link
-                    href={href('/products')}
-                    onClick={() => setProducts(false)}
-                    className="text-[11px] font-semibold text-brand hover:text-brand-dark transition-colors"
-                  >
+                  <Link href={href('/products')} onClick={() => setProdOpen(false)} className="text-[11px] font-semibold text-brand hover:text-brand-dark">
                     {t('products')} →
                   </Link>
                 </div>
@@ -114,7 +123,9 @@ export default function Navbar({ locale }: { locale: string }) {
 
           <Link
             href={href('/contact')}
-            className="text-[13px] font-medium text-[--muted] hover:text-brand transition-colors duration-200"
+            className={`text-[13px] font-medium transition-colors duration-200 ${
+              isHero ? 'text-white/80 hover:text-white' : 'text-[--muted] hover:text-brand'
+            }`}
           >
             {t('contact')}
           </Link>
@@ -122,47 +133,46 @@ export default function Navbar({ locale }: { locale: string }) {
 
         {/* Right: locale + CTA */}
         <div className="hidden md:flex items-center gap-5">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center">
             {LOCALES.map((l, i) => (
               <span key={l.code} className="flex items-center">
                 <button
                   onClick={() => switchLocale(l.code)}
-                  className={`font-['Space_Mono'] text-[9px] tracking-widest uppercase px-2 py-1 transition-colors ${
-                    locale === l.code ? 'text-brand font-bold' : 'text-[--subtle] hover:text-[--muted]'
+                  className={`font-mono-chem text-[9px] tracking-widest uppercase px-2 py-1 transition-colors ${
+                    locale === l.code
+                      ? 'text-brand font-bold'
+                      : isHero ? 'text-white/40 hover:text-white/70' : 'text-[--subtle] hover:text-[--muted]'
                   }`}
                 >
                   {l.label}
                 </button>
                 {i < LOCALES.length - 1 && (
-                  <span className="text-[--border] text-[10px] select-none">·</span>
+                  <span className={`text-[10px] select-none ${isHero ? 'text-white/20' : 'text-[--border]'}`}>·</span>
                 )}
               </span>
             ))}
           </div>
 
-          <Link
-            href={href('/contact')}
-            className="btn-primary text-[11px] py-2 px-4"
-          >
-            {t('contact')}
+          <Link href={href('/contact')} className="btn-primary text-[11px] py-2 px-4">
+            {t('request_quote')}
           </Link>
         </div>
 
         {/* Mobile hamburger */}
         <button
           className="md:hidden flex flex-col gap-[5px] p-2"
-          onClick={() => setOpen(!open)}
+          onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          <span className={`block w-5 h-px bg-[--text] transition-all duration-300 ${open ? 'rotate-45 translate-y-[6px]' : ''}`} />
-          <span className={`block w-5 h-px bg-[--text] transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
-          <span className={`block w-5 h-px bg-[--text] transition-all duration-300 ${open ? '-rotate-45 -translate-y-[6px]' : ''}`} />
+          <span className={`block w-5 h-px transition-all duration-300 ${isHero ? 'bg-white' : 'bg-[--text]'} ${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
+          <span className={`block w-5 h-px transition-all duration-300 ${isHero ? 'bg-white' : 'bg-[--text]'} ${menuOpen ? 'opacity-0' : ''}`} />
+          <span className={`block w-5 h-px transition-all duration-300 ${isHero ? 'bg-white' : 'bg-[--text]'} ${menuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} />
         </button>
       </div>
 
       {/* Mobile drawer */}
-      {open && (
-        <div className="md:hidden bg-corp border-t border-[--border]">
+      {menuOpen && (
+        <div className="md:hidden bg-corp border-t border-white/10">
           <div className="container-site py-6">
             {[
               { path: '/',        label: t('home') },
@@ -173,7 +183,7 @@ export default function Navbar({ locale }: { locale: string }) {
               <Link
                 key={item.path}
                 href={href(item.path)}
-                onClick={() => setOpen(false)}
+                onClick={() => setMenuOpen(false)}
                 className="flex justify-between items-center py-3.5 border-b border-white/10 text-[13px] font-medium text-white/80 hover:text-white transition-colors"
               >
                 {item.label}
@@ -184,10 +194,8 @@ export default function Navbar({ locale }: { locale: string }) {
               {LOCALES.map((l) => (
                 <button
                   key={l.code}
-                  onClick={() => { switchLocale(l.code); setOpen(false) }}
-                  className={`font-['Space_Mono'] text-[9px] tracking-widest uppercase ${
-                    locale === l.code ? 'text-brand' : 'text-white/30'
-                  }`}
+                  onClick={() => { switchLocale(l.code); setMenuOpen(false) }}
+                  className={`font-mono-chem text-[9px] tracking-widest uppercase ${locale === l.code ? 'text-brand' : 'text-white/30'}`}
                 >
                   {l.label}
                 </button>

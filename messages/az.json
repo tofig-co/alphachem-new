@@ -1,49 +1,104 @@
 {
   "nav": {
-    "home": "Ana səhifə",
+    "home": "Ana Səhifə",
     "about": "Haqqımızda",
     "products": "Məhsullar",
-    "contact": "Əlaqə"
+    "contact": "Əlaqə",
+    "request_quote": "Sorğu Göndər"
   },
   "home": {
-    "hero_cta": "Məhsullara bax",
-    "hero_title": "Kimyəvi Xammal Tədarükü",
+    "hero_eyebrow": "2000-ci ildən · Bakı, Azərbaycan",
+    "hero_title": "Kimyəvi Xammal Tədarükündə Etibarlı Tərəfdaş",
     "hero_subtitle": "Əczaçılıq · Baytarlıq · Texniki",
-    "about_title": "Alpha Chemicals haqqında",
+    "hero_cta": "Məhsullara Bax",
+    "hero_cta_secondary": "Sorğu Göndər",
+    "stats_years": "İllik Təcrübə",
+    "stats_products": "Məhsul",
+    "stats_compliance": "Nazirlik Standartı",
+    "stats_delivery": "Sürətli Çatdırılma",
+    "industries_eyebrow": "Xidmət Etdiyimiz Sektorlar",
+    "industries_pharma_title": "Əczaçılıq",
+    "industries_pharma_desc": "Dərman istehsalı üçün API, eksipientlər və vitaminlər.",
+    "industries_vet_title": "Baytarlıq",
+    "industries_vet_desc": "Baytarlıq dərmanları istehsalı üçün yüksək keyfiyyətli maddələr.",
+    "industries_tech_title": "Texniki və Sənaye",
+    "industries_tech_desc": "Texniki tətbiqlər üçün qeyri-üzvi duzlar və kimyəvi maddələr.",
+    "products_eyebrow": "Məhsul Kataloqu",
     "products_title": "Seçilmiş Məhsullar",
-    "view_all": "Bütün məhsullar"
+    "view_all": "Bütün məhsullar",
+    "about_eyebrow": "Alphachem Haqqında",
+    "about_title": "Kimyəvi tədarükdə 25 illik təcrübə",
+    "learn_more": "Ətraflı",
+    "cta_title": "Xüsusi birləşməyə ehtiyacınız var?",
+    "cta_sub": "Komandamız tələb olunan kimyəvi maddələri ən qısa müddətdə və rəqabətli qiymətlərlə təmin edir.",
+    "cta_whatsapp": "WhatsApp",
+    "cta_email": "E-poçt"
   },
   "products": {
     "title": "Məhsullar",
-    "all_categories": "Bütün kateqoriyalar",
-    "no_products": "Bu kateqoriyada məhsul tapılmadı",
+    "eyebrow": "Məhsul Kataloqu",
+    "search_placeholder": "Ad və ya formula ilə axtar...",
+    "all_categories": "Hamısı",
+    "no_products": "Məhsul tapılmadı",
     "back": "Məhsullara qayıt",
-    "inquire": "Sorğu göndər"
+    "inquire": "Sorğu Göndər",
+    "specs_title": "Texniki Göstəricilər",
+    "related_title": "Əlaqəli Məhsullar",
+    "inquiry_prompt": "Bu məhsul sizi maraqlandırır?"
+  },
+  "inquiry": {
+    "title": "Sorğu Göndər",
+    "subtitle": "Məlumatlarınızı doldurun, 1 iş günü ərzində cavab veririk.",
+    "name": "Ad Soyad",
+    "name_ph": "Adınızı daxil edin",
+    "company": "Şirkət",
+    "company_ph": "Şirkətinizin adı",
+    "email": "E-poçt",
+    "email_ph": "siz@sirket.com",
+    "phone": "Telefon (isteğe bağlı)",
+    "phone_ph": "+994 XX XXX XX XX",
+    "message": "Mesaj",
+    "message_ph": "Tələbatınızı təsvir edin — miqdar, təmizlik dərəcəsi, qablaşdırma və s.",
+    "submit": "Göndər",
+    "submitting": "Göndərilir...",
+    "success_title": "Sorğunuz göndərildi!",
+    "success_body": "Sizin e-poçtunuza 1 iş günü ərzində cavab veriləcək.",
+    "error": "Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin."
   },
   "about": {
-    "title": "Haqqımızda"
+    "title": "Haqqımızda",
+    "eyebrow": "Tarixçəmiz",
+    "timeline_title": "İki Onillik İnkişaf",
+    "values_title": "Fərqimiz"
   },
   "contact": {
     "title": "Əlaqə",
-    "subtitle": "Bizimlə əlaqə saxlayın",
+    "eyebrow": "Bizimlə Əlaqə",
+    "subtitle": "Sorğunuzu göndərin, 1 iş günü ərzində cavab veririk.",
     "address_label": "Ünvan",
     "phone_label": "Telefon",
     "email_label": "E-poçt",
+    "hours_label": "İş Saatları",
     "address": "Azərbaycan, Bakı şəhəri",
     "phone": "+994 55 535 00 01",
-    "email": "sales@alphachem.az"
+    "email": "sales@alphachem.az",
+    "hours": "Bazar ertəsi – Cümə: 09:00 – 18:00",
+    "hours_tz": "Bakı vaxtı (UTC +4)"
   },
   "footer": {
-    "rights": "Bütün hüquqlar qorunur"
+    "rights": "Bütün hüquqlar qorunur",
+    "tagline": "2000-ci ildən etibarən kimyəvi xammal sahəsində etibarlı tərəfdaşınız.",
+    "nav_title": "Naviqasiya",
+    "contact_title": "Əlaqə"
   },
   "categories": {
     "api": "API (Aktiv)",
-    "excipient-pharma": "Excipient (Farma)",
+    "excipient-pharma": "Eksipient (Farma)",
     "vitamin": "Vitamin",
-    "excipient-food": "Excipient (Qida)",
-    "excipient-technical": "Excipient (Texniki)",
-    "intermediate": "Intermediate",
-    "other": "Digər kimyəvi maddələr",
+    "excipient-food": "Eksipient (Qida)",
+    "excipient-technical": "Eksipient (Texniki)",
+    "intermediate": "Aralıq Məhsul",
+    "other": "Digər Kimyəvi Maddələr",
     "mineral": "Mineral"
   }
 }
