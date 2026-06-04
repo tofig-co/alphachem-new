@@ -95,7 +95,8 @@ export default function Navbar({ locale }: { locale: string }) {
             </Link>
 
             {prodOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-68 bg-white border border-[--border] shadow-xl overflow-hidden rounded-sm">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 w-68 pt-2">
+              <div className="bg-white border border-[--border] shadow-xl overflow-hidden rounded-sm">
                 <div className="h-[3px] bg-brand" />
                 {CATEGORIES.map((cat) => (
                   <Link
@@ -113,6 +114,7 @@ export default function Navbar({ locale }: { locale: string }) {
                     {t('products')} →
                   </Link>
                 </div>
+              </div>
               </div>
             )}
           </div>
