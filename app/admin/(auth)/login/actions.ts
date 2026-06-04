@@ -14,9 +14,10 @@ export async function loginAction(_prev: unknown, formData: FormData) {
   const cookieStore = await cookies()
   cookieStore.set('admin_session', process.env.ADMIN_SECRET!, {
     httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
     path: '/admin',
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    maxAge: 60 * 60 * 24 * 7,
   })
 
   redirect('/admin/products')

@@ -16,8 +16,9 @@ export default function LoginPage() {
           </div>
           <form action={action} className="space-y-4">
             <div>
-              <label className="field-label">Password</label>
+              <label htmlFor="password" className="field-label">Password</label>
               <input
+                id="password"
                 type="password"
                 name="password"
                 required
