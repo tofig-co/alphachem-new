@@ -5,6 +5,7 @@ import { routing } from '@/i18n/routing'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
+import NextTopLoader from 'nextjs-toploader'
 import type { Metadata } from 'next'
 
 type Props = {
@@ -69,6 +70,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         />
       </head>
       <body>
+        <NextTopLoader color="#0086A1" height={2} showSpinner={false} />
         <NextIntlClientProvider messages={messages}>
           <Navbar locale={locale} />
           <main>{children}</main>

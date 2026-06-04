@@ -160,9 +160,9 @@ export default function Navbar({ locale }: { locale: string }) {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          <span className={`block w-5 h-px transition-all duration-300 ${isHero ? 'bg-white' : 'bg-[--text]'} ${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
-          <span className={`block w-5 h-px transition-all duration-300 ${isHero ? 'bg-white' : 'bg-[--text]'} ${menuOpen ? 'opacity-0' : ''}`} />
-          <span className={`block w-5 h-px transition-all duration-300 ${isHero ? 'bg-white' : 'bg-[--text]'} ${menuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} />
+          <span className={`block w-5 h-px transition-all duration-300 bg-brand ${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
+          <span className={`block w-5 h-px transition-all duration-300 bg-brand ${menuOpen ? 'opacity-0' : ''}`} />
+          <span className={`block w-5 h-px transition-all duration-300 bg-brand ${menuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} />
         </button>
       </div>
 
