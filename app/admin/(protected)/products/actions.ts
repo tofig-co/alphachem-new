@@ -22,8 +22,9 @@ export async function createProduct(formData: FormData) {
   await requireAdmin()
   const supabase = createAdminClient()
 
-  const nameAz = formData.get('name_az') as string
-  const slug = slugify(nameAz.trim(), { lower: true, strict: true }) || `product-${Date.now()}`
+  const nameAz = (formData.get('name_az') as string | null)?.trim() ?? ''
+  if (!nameAz) throw new Error('AZ name is required')
+  const slug = slugify(nameAz, { lower: true, strict: true }) || `product-${Date.now()}`
 
   const imageFile = formData.get('image') as File | null
   let imageUrl: string | null = null
@@ -46,11 +47,12 @@ export async function createProduct(formData: FormData) {
   if (error || !product) throw new Error(error?.message ?? 'Failed to create product')
 
   await supabase.from('product_translations').insert([
-    { product_id: product.id, locale: 'az', name: (formData.get('name_az') as string).trim(), description: (formData.get('desc_az') as string) || null },
+    { product_id: product.id, locale: 'az', name: nameAz, description: (formData.get('desc_az') as string) || null },
     { product_id: product.id, locale: 'en', name: (formData.get('name_en') as string)?.trim() ?? '', description: (formData.get('desc_en') as string) || null },
     { product_id: product.id, locale: 'ru', name: (formData.get('name_ru') as string)?.trim() ?? '', description: (formData.get('desc_ru') as string) || null },
   ])
 
+  revalidatePath('/', 'layout')
   redirect('/admin/products')
 }
 
@@ -73,11 +75,12 @@ export async function updateProduct(formData: FormData) {
   }).eq('id', id)
 
   await supabase.from('product_translations').upsert([
-    { product_id: id, locale: 'az', name: (formData.get('name_az') as string).trim(), description: (formData.get('desc_az') as string) || null },
+    { product_id: id, locale: 'az', name: (formData.get('name_az') as string)?.trim() ?? '', description: (formData.get('desc_az') as string) || null },
     { product_id: id, locale: 'en', name: (formData.get('name_en') as string)?.trim() ?? '', description: (formData.get('desc_en') as string) || null },
     { product_id: id, locale: 'ru', name: (formData.get('name_ru') as string)?.trim() ?? '', description: (formData.get('desc_ru') as string) || null },
   ], { onConflict: 'product_id,locale' })
 
+  revalidatePath('/', 'layout')
   redirect('/admin/products')
 }
 

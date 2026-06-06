@@ -46,7 +46,8 @@ export async function deleteSlide(formData: FormData) {
 
   const { data: slide } = await supabase.from('slider_images').select('image_url').eq('id', id).single()
   if (slide?.image_url) {
-    const path = slide.image_url.split('/').pop()
+    const raw = slide.image_url.split('/').pop() ?? ''
+    const path = raw.split('?')[0]
     if (path) await supabase.storage.from('slider').remove([path])
   }
 
