@@ -10,6 +10,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       <body style={{ fontFamily: "'IBM Plex Sans', sans-serif", margin: 0 }}>
         <div className="flex min-h-screen">
           <aside className="w-56 bg-corp text-white flex flex-col shrink-0 fixed top-0 bottom-0">
+            <div className="h-0.5 bg-brand shrink-0" />
             <div className="px-5 py-5 border-b border-white/10">
               <p className="font-mono-chem text-[9px] tracking-widest uppercase text-brand">Alphachem</p>
               <p className="text-[14px] font-semibold text-white mt-0.5">Admin</p>
@@ -23,7 +24,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
               </form>
             </div>
           </aside>
-          <main className="flex-1 ml-56 bg-surface min-h-screen">
+          <main className="flex-1 ml-56 bg-slate-50 min-h-screen">
             {children}
           </main>
         </div>
